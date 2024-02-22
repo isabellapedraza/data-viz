@@ -22,18 +22,30 @@
 
 			<h3>Overall Analysis Questions</h3>
 			<ol>
-				<li>Who is buying and selling properties?</li>
-				<ol>Motivation: I have an internal hypothesis that properties, particularly single family homes, are being sold by individuals to corporate investors. For example, in my hometown, Miami, it's not uncommon 
-				to see insane offers for properties that have development potential. I'd like to see which kinds of properties are being bought/sold to which type of sellers/purchasers? Who are the main market makers/movers 
-				in Boston? </ol>
-				<li>What is the difference in profit between selling luxury and non-luxury homes?</li>
-				<ol>Motivation: As we saw in the article <a href="https://apps.bostonglobe.com/2023/10/special-projects/spotlight-boston-housing/boston-towers-of-wealth/"> Reckoning with Boston's Towers of Wealth</a>,
-				developers in Boston have mostly focused on creating luxury housing over affordable housing. I'm curious – are they really making that much more profit from luxury homes when buildings, such as One Dalton, 
-				still have unsold units? Wouldn't it make more sense to create profit from volume by buying and selling moderately priced homes? </ol>
-				<li>How many homes currently qualify for a transfer fee under Healey's <a href="https://www.bostonglobe.com/2023/10/18/business/healey-housing-proposal/"> Affordable Homes Act</a>?</li>
-				<ol>Motivation: New policies, such as Wu's transfer fee for property sales over $2 million, have the potential to create hundreds of millions of dollars in revenue. Healey's bill proposes to create a tiered transfer fee 
-				on real-estate sales above $1 million or the county's median home price, whichever is higher, to support affordable housing. The fee would only apply to the part of the sale that exceeds those levels. What kind of impact
-				would this really make in Boston? Would there be a significantly higher number of sales that qualify under this bill?</ol>
+				<li>What are the profiles of buyers and sellers in the real estate market, including the types of homes they typically buy or sell?</li>
+				
+				<ol>Motivation: After reading <a href="https://homesforprofit.mapc.org/report">Homes for a Profit</a>, I've realized that a large amount of housing is being bought up by investors. 
+					If homes are being sold for a profit like any other asset – such as a shares in a company – is the profit being shared across individuals and investors, or are investors the primary 
+					generators and benefactors of profit? Is the market slowly being dominated to only pass hands between investors, in the same way stocks are usually held, bought, and sold by large
+					financial institutions? 
+				</ol>
+
+				<li>For the years 2019-2022, how many residential and commercial property sales in Boston would have qualified for a transfer fee under Healey's <a href="https://www.bostonglobe.com/2023/10/18/business/healey-housing-proposal/"> Affordable Homes Act</a>?</li>
+
+				<ol>Motivation: As we saw in the article <a href="https://apps.bostonglobe.com/2023/10/special-projects/spotlight-boston-housing/boston-towers-of-wealth/"> Reckoning with Boston's 
+					Towers of Wealth</a>, Mayor Wu's proposed transfer fee on residential and commercial property sales over $2 million would have generated $384 million in potential transfer fee revenue across the years 2019-2022.
+					Last year, Governor Healey proposed a more "aggressive" bill that would create a tiered transfer fee on real-estate sales above $1 million or the county's median home price, 
+					whichever is higher, to support affordable housing. The fee would only apply to the part of the sale that exceeds those levels. Is this bill actually more aggressive than Mayor Wu's?
+					How much more revenue would actually be generated under Healey's bill?    
+				</ol>
+
+				<li>How does the profit margin compare between selling luxury homes versus non-luxury homes?</li>
+
+				<ol>Motivation: As we saw in the article <a href="https://apps.bostonglobe.com/2023/10/special-projects/spotlight-boston-housing/boston-towers-of-wealth/"> Reckoning with Boston's 
+					Towers of Wealth</a>, developers in Boston have mostly focused on creating luxury housing over affordable housing. I'm curious – are they really making that much more profit 
+					from luxury homes when buildings, such as One Dalton, still have unsold units? Wouldn't it make more sense to create profit from volume by buying and selling moderately priced homes? 
+				</ol>
+
 			</ol>
 		</section>
 
@@ -41,75 +53,128 @@
 			<h2>Discoveries & Insights</h2>
 
 			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
+				<img src="1.png" alt="" style="height:100%;width:100%;"/>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				In this first visualization, we examine what kinds of properties, and how many of those properties exist in our dataset. Because I am mostly curious about housing, I look at the different 
+				property codes, their specific names, and the larger proptype buckets they fall in. I decide to filter out what I believe are non-residential properties by first selecting proptypes that contain residential 
+				properties (this is a lot easier than filtering each type of property type by its specific name) and then selecting properties from these larger buckets whose text descriptions mention they are residential.
+				Because I am not an expert in what usually qualifies as a residential property, I assumed that any place where people can live under shelter for a period of time is considered residential. 
 				</figcaption>
 			</figure>
 
 			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
+				<img src="2.png" alt="" style="height:100%;width:100%;"/>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				My first attempt to answer the question of led to this visualization. I'm a bit suspicious of why the condominium count is so high. Clicking and viewing the data, I realize we are performing duplicate counts! For each transaction, we have 7 counts 
+				of it, and therefore 7 counts of the same address. In order to get the correct number of counts, I make sure to to count a property type by it's unique address so that we don't count the number transactions, just the actual number of properties. I realize, 
+				however, that we are also interested in all the transactions that occur for a unique address (since we could have bought and sold the same property but have different types of transactions, such as investor-to-investor or non-investor-to-investor). To estimate
+				the number of transactions, I use price as a detail, since it's existence implies a purchase/sale. 
 				</figcaption>
 			</figure>
 
 			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
+				<img src="13.png" alt="" style="height:100%;width:100%;"/>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Having fixed this data quality issue, we can see the emergence of some trends, such as condominiums transactions mostly being non-investor-to-investor transactions. However, it's hard to see the trends of other properties due to the significantly higher count of 
+				condominiums in our dataset.
 				</figcaption>
 			</figure>
 
 			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
+				<img src="3.png" alt="" style="height:100%;width:100%;"/>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Therefore, I decided to shift my question to: for a property type, what percentage of transactions are and aren't investor-to-investor? As we can see, certain results align with common intuition: multi-unit apartment
+				buildings, condo buildings, mixed commercial/residential buildings, commercial properties (hotels, motels, nursing homes), and subsidized housing (since this is usually created by private corporations with government subsidies) mostly 
+				stayed in the hands of investors. Approximately one-third of all single, double, and triple family residences are owned by investors. I hadn't expected for condominiums and 2-5 family residences to not have much investor-to-investor 
+				transaction activity. I do think the agricultural residences not moving between investor to investor makes since, given the large number of small, family-owned farms near Boston. 
 				</figcaption>
 			</figure>
 
 			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
+				<img src="5.png" alt="" style="height:100%;width:100%;"/>
+				<img src="6.png" alt="" style="height:100%;width:100%;"/>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				To learn more about the profiles of these investors, their real-estate preferences, and the nature of the transactions for each property type, I decided to inspect whether, for a particular transaction type (such as investor-to-investor), the buyer or seller
+				is a non-investor, a small investor, a large investor, or an institutional investor. Through this visualization, we can now begin to see different trends between property type, type of transaction, and investor type. In particular, we see that institutional and 
+				large investors mostly participate in investor-to-investor transactions that focus on commercial properties, hotels, and group housing. One outlier from this is that an institutional investor did sell a hotel to a non-investor. Small investors, on the other hand, 
+				span both types of transactions, and are generally interested in almost all types of properties. Notably, non-investors made up the majority of buyers and sellers of condominiums and single, double, triple family residences. We can also see that small investors have 
+				a stronger presence in the transactions concerning these property types than other kinds of investors. Interestingly, medium investors were particularly present in the selling of single family residences in comparison to their buying transactions.  
 				</figcaption>
 			</figure>
 
 			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
+				<img src="7.png" alt="" style="height:100%;width:100%;"/>
+				<img src="8.png" alt="" style="height:100%;width:100%;"/>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Seeing the previous visualization made me think about what are the specific entities investors are using to conduct these transactions? By creating a pivot with the different buyer and seller type binary variables, we can see some other interesting trends.
+				As a preface, any transactions that do not use one of these entities will not show up. In addition, we do not see any government buyers in the legend because there are no transactions with the government as a buyer. From this visualization we can see that trusts and 
+				LLCs are the preferred entities used by investors to conduct real-estate transactions across different property types. Only subsidized housing, nursing homes, and fraternity/sorority property types, on the seller side, primary use businesses. 
 				</figcaption>
 			</figure>
 
 			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
+				<img src="4.png" alt="" style="height:100%;width:100%;"/>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				At one point throughout this analysis, I began to think about how have investor to investor transactions for these different properties changed over time? To get a general sense of how the share of investor to investor transactions for residential properties has 
+				changed over time, I decided to plot this line graph. We can see a clear trend – more and more investor-to-investor transactions are occurring for residential properties, with investor to investor transaction doubling across the years 2000-2022.
+				Notably, there was a spike in investor-to-investor transactions (almost triple the original value in 2000) in 2019.
 				</figcaption>
 			</figure>
 
 			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
+				<img src="9.png" alt="" style="height:100%;width:100%;"/>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				To begin to explore how many property sales would fall under Healey's bill, I first wanted to see how many qualifying transactions (> $1 million) for different properties types between the years of 2019-2022 occurred. I first decided to include all property types except those classified
+				as exempt, since usually transactions surrounding these types of properties do not accrue any tax. As we can see, we have an extremely high number of transactions per year. Looking further into the data, we currently have 7 duplicates of each transaction! Therefore, by using an LOD calculation with 
+				the date, price, and address, I was able to calculate the correct number of transactions.
 				</figcaption>
 			</figure>
 
 			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
+				<img src="11.png" alt="" style="height:100%;width:100%;"/>
+				<img src="10.png" alt="" style="height:100%;width:100%;"/>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Knowing the correct number of transactions, I was able to calculate the most and least conservative estimates for potential revenue from transfer fees. For reference, I've also included the visualization from the article detailing Mayor Wu's potential transfer fee revenue from her bill. Interestingly, 
+				Healey's bill, although encompasses a larger number of properties, isn't able to capture as much revenue as Wu's. We could blame the data – but I think it's more of a function of <i>how</i> Healey's bill approaches the transfer fee. 
 				</figcaption>
 			</figure>
 
 			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
+				<img src="14.png" alt="" style="height:100%;width:100%;"/>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Healey's bill is designed to be an <i>incremental</i> transfer fee, meaning it only applies to the part of the sale that exceeds  $1 million or the county's median home price. As we learnt in the article, in Suffolk county, the median home price hovers around a little less than $1 million. I wanted to see how 
+				much transfer fee revenue would actually be captured if the bill was <i>non-incremental</i>, which we can see is, on average, $5 million for a 0.5% transfer fee and $20 million higher for a 2% transfer fee. 
 				</figcaption>
 			</figure>
-		</section>
+
+			<figure>
+				<img src="12.png" alt="" style="height:100%;width:100%;"/>
+				<figcaption>
+				Lastly, I became curious about <i>where</i> Healey's transfer fee would have the largest impact in Boston between the years of 2019-2022. My first attempt at creating the visualization showed that there were certain zip codes that were inputted incorrectly in the data. Therefore, I manually looked up the address 
+				on Google, and found what the correct zip code was and fixed it. Unsurprisingly, we can see most of it's effects are concentrated in Back Bay, South End, and Beacon Hill. 
+				</figcaption>
+			</figure>
+
+			<figure>
+				<img src="15.png" alt="" style="height:100%;width:100%;"/>
+				<figcaption>
+				To begin exploring what are the profit differences between luxury and non luxury properties, I inspected the values for the percentage difference between sales of a property. I noticed there were null values, an extremely large number of 0 values, and very high percentages (almost 2 million). I first filtered 
+				the null values since they aren't relevant to figuring out our third overall question. I then noticed a slight inconsistency between how records were made. It seems for some data, if the property was sold for the first time, the percentage difference between sales would be 0. However, other data marked the 
+				the percentage difference between sales as the value of the first sale of a property. Therefore, to mediate these inconsistencies, I decided to filter out properties whose last sale price and most recent sale price are the same. Once I performed this change, I also realized there were a lot of properties whose 
+				percentage difference was -100%, since their sale price was $1 and last sale price was $0. I decided to filter out transactions with a sale price of $1 or $0 and last sale price of $0 since it seems unlikely a property was sold for this value, and is perhaps a placeholder for unknown sales. Looking at some of the 
+				extreme negative values, I realized that a lot of the prices had been inputted incorrectly since they were missing a zero (I used the date and address of a transaction to verify with Zillow) or were rent prices, not sales prices. I therefore manually filtered out extreme values with sale prices that were incorrect. 
+				</figcaption>
+			</figure>
+
+			<figure>
+				<img src="16.png" alt="" style="height:100%;width:100%;"/>
+				<figcaption>
+				After cleaning the data, to answer the question how does the profit margin compare between selling luxury homes versus non-luxury homes? I realized this question could be dependant on the year. I first decided to encode luxury and non luxury homes are color, where a luxury home is defined as having a sale price of > $1 million.
+				I then decided to use the median percentage difference between sales to avoid skewing the data by the outliers, since I wanted to see general trends. Lastly, I used a box-and-whisker plot to try to visualize the difference between luxury and non luxury homes. Here we can see some clear trends: in the years 2004, 2005, and 2018-2022, 
+				non luxury properties had higher median percentage difference between sales than luxury properties. The year 2001 had the greatest difference between luxury and non luxury properties, and since 2011-2017, those differences got smaller and smaller. From 2018 onwards, we can see difference between luxury and non luxury properties is
+				getting larger. 
+				</figcaption>
+			</figure>
 
 		<section>
 			<h2>Summary</h2>
